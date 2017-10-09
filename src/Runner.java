@@ -8,7 +8,7 @@ public class Runner {
 
 		VectorStack<Expression> ExpressionStack = new VectorStack<Expression>();
 
-		String x = "5+(4*3)";
+		String x = "3";
 		Scanner stream = new Scanner(x);
 		stream.useDelimiter("");
 
@@ -41,18 +41,7 @@ public class Runner {
 						ExpressionStack.push(ex);
 						ex = null;
 					}
-				case CLOSE:
-					if (!ExpressionStack.isEmpty()) {
-						Expression ex2 = ExpressionStack.pop();
-						ex = ex2.Evaluate(ex);
-						if(stream.hasNext()) {
-							op = Operator.Type(stream.next().charAt(0));
-							ex = new Expression(ex.getValue(), op);
-						}
-					} else {
-						ExpressionStack.push(ex);
-						ex = null;
-					}
+				
 				}
 
 			} else if (left != null && op == null) {
@@ -66,10 +55,6 @@ public class Runner {
 
 			} else if (left == null && op != null) {
 
-				switch (op) {
-				case OPEN:
-					ex = null;					
-				}
 				
 			} else {
 				break;
@@ -77,6 +62,7 @@ public class Runner {
 
 		}
 
+		//return ex.getValue();
 		System.out.println(ex.getValue());
 
 	}

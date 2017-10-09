@@ -44,7 +44,7 @@ public enum Operator {
 		case CLOSE:
 			return ")";
 		default:
-			return "KYS";
+			return "NONE";
 		}
 	}
 }
