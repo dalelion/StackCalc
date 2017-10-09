@@ -1,5 +1,6 @@
 import java.util.Scanner;
-
+import java.io.File;
+import java.io.FileNotFoundException;
 // (5 * (4 - 3) + 2)
 
 public class Runner {
@@ -10,7 +11,22 @@ public class Runner {
 		//System.out.println(k.toString());
 		//System.out.println(Evaluate("1+1*3"));
 		//System.out.println(parenthEval("(1+1)+(3*2)"));
-		System.out.println(parenthEval("(5*5*2*2)-(2*5)-(5*2*(2+3+4))"));
+		System.out.println(parenthEval("6/-3"));
+		
+		//readFile("Infix Calculator Expressions - valid -- 2016-10-13 2.txt");
+		
+	}
+	
+	public static void readFile (String Path) {
+		try(Scanner fileReader = new Scanner(new File(Path))){
+			while(fileReader.hasNextLine()) {
+				String expression = fileReader.nextLine();
+				System.out.println(expression + " = " + parenthEval(expression));
+			}
+		}catch(FileNotFoundException e) {
+			System.out.println("File Not Found!");
+			System.exit(0);
+		}
 	}
 	
 	public static String parenthEval(String input){
@@ -134,7 +150,7 @@ public class Runner {
 				}
 
 			} else if (left == null && op != null) {
-
+				ex = ex != null ? ex : new Expression(0, op);
 				
 			} else {
 				break;
