@@ -59,8 +59,10 @@ public class Runner {
 						out.append(master.charAt(i));
 					}
 					Integer replace = Evaluate(out.toString()); // (5 * 2) = 10
-					for(int i = parenLeft+1; i <= parenRight; i++){ // 5 + ()
-						master.deleteCharAt(i);
+					int k = parenRight - parenLeft;
+					while(k > 0){ // 5 + ()
+						master.deleteCharAt(parenLeft+1);
+						k--;
 					}
 					master.replace(parenLeft, parenLeft+replace.toString().length()-1, replace.toString()); // 5 + 10
 				}
