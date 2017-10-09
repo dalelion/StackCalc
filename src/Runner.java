@@ -9,7 +9,8 @@ public class Runner {
 		//k.replace(1, 2, "oa");
 		//System.out.println(k.toString());
 		//System.out.println(Evaluate("1+1*3"));
-		System.out.println(parenthEval("(1+1)+(3*2)"));
+		//System.out.println(parenthEval("(1+1)+(3*2)"));
+		System.out.println(parenthEval("(5-6)-(7-8)"));
 	}
 	
 	public static String parenthEval(String input){
@@ -64,7 +65,7 @@ public class Runner {
 						master.deleteCharAt(parenLeft+1);
 						k--;
 					}
-					master.replace(parenLeft, parenLeft+replace.toString().length()-1, replace.toString()); // 5 + 10
+					master.replace(parenLeft, parenLeft+1, replace.toString()); // 5 + 10
 				}
 			}
 			return master.toString();
