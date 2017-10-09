@@ -5,10 +5,10 @@ import java.util.Scanner;
 public class Runner {
 	
 	public static void main(String args[]){
-		StringBuilder k = new StringBuilder("jews");
-		k.replace(1, 2, "oa");
-		System.out.println(k.toString());
-		System.out.println(Evaluate("1+1*3"));
+		//StringBuilder k = new StringBuilder("test");
+		//k.replace(1, 2, "oa");
+		//System.out.println(k.toString());
+		//System.out.println(Evaluate("1+1*3"));
 		System.out.println(parenthEval("(1+1)+(3*2)"));
 	}
 	
@@ -53,9 +53,9 @@ public class Runner {
 							break;
 						}
 					}
-					System.out.println(parenRight); // test parenRight
-					System.out.println(parenLeft); // test parenLeft
-					for(int i = parenLeft+1; i < parenRight-1; i++){ // 5 + (5 * 2)
+					//System.out.println(parenRight); // test parenRight
+					//System.out.println(parenLeft); // test parenLeft
+					for(int i = parenLeft+1; i < parenRight; i++){ // 5 + (5 * 2)
 						out.append(master.charAt(i));
 					}
 					Integer replace = Evaluate(out.toString()); // (5 * 2) = 10
