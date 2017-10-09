@@ -10,7 +10,7 @@ public class Runner {
 		//System.out.println(k.toString());
 		//System.out.println(Evaluate("1+1*3"));
 		//System.out.println(parenthEval("(1+1)+(3*2)"));
-		System.out.println(parenthEval("(5-6)-(7-8)"));
+		System.out.println(parenthEval("(5*5*2*2)-(2*5)-(5*2*(2+3+4))"));
 	}
 	
 	public static String parenthEval(String input){
@@ -97,6 +97,11 @@ public class Runner {
 
 			if (stream.hasNextInt()) {
 				left = stream.nextInt();
+				
+				while(stream.hasNextInt()) {
+					left = left * 10 + stream.nextInt();
+				}
+				
 			}
 			if (stream.hasNext()) {
 				op = Operator.Type(stream.next().charAt(0));
