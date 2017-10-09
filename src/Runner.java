@@ -13,40 +13,6 @@ public class Runner {
 	}
 	
 	public static String parenthEval(String input){
-//		VectorStack<String> stackedInput = new VectorStack<>(input.length());
-//		VectorStack<String> stackedInput2 = new VectorStack<>(input.length());
-//		VectorStack<String> stackedInput3 = new VectorStack<>(input.length());
-//		StringBuilder inBuild = new StringBuilder(input).reverse();
-//		while(inBuild.length() > 0){
-//			//int i = 0;
-//			for(int i = 0; i < inBuild.length(); i++){
-//				stackedInput.push(inBuild.substring(i, i+1));
-//			}
-//			while(stackedInput.peek() != ")"){
-//				stackedInput2.push(stackedInput.pop());
-//			}
-//			if(!stackedInput.isEmpty()){
-//				stackedInput2.push(stackedInput.pop());
-//			}
-//			while(stackedInput2.peek() != "("){
-//				stackedInput3.push(stackedInput2.pop());
-//			}
-//			if(!stackedInput2.isEmpty()){
-//				stackedInput3.push(stackedInput2.pop());
-//			}
-//			
-//			if(i == inBuild.length()){
-//				return Evaluate(stackedInput);
-//			}
-//			else{
-//				stackedInput.push(inBuild.substring(i, i+1));
-//				while(stackedInput.peek().charAt(0) != '('){
-//					stackedInput2.push(stackedInput.pop());
-//				}
-//				stackedInput2.push(stackedInput.pop());
-//				while(stackedInput)
-//			}
-//		}
 		boolean parenthetical = false;
 		int parenRight = 0;
 		int parenLeft = 0;
@@ -60,7 +26,6 @@ public class Runner {
 		}
 		
 		if(!parenthetical){
-			//return Evaluate(input).toString();
 			return Evaluate(master.toString()).toString();
 		}
 		
