@@ -28,14 +28,14 @@ public class Runner {
 	}
 
 	public static void readFile(String Path) {
-		System.out.printf("%5s   %10s%n%n", "File: ", Path);
-		System.out.printf("%-35s      |%10s    | %10s%n", "Expression", "Result", "Expected");
+		System.out.println("File: " + Path + "\n");
+		System.out.printf("%-35s        %10s%n", "Expression", "Result");
 		try (Scanner fileReader = new Scanner(new File(Path))) {
 			while (fileReader.hasNextLine()) {
 				String expression = fileReader.nextLine();
 				System.out.printf("%-35s      = %10s%n", expression, parenthEval(expression));
 			}
-			System.out.println("=====================================================================\n");
+			System.out.println("======================================================\n");
 		} catch (FileNotFoundException e) {
 			System.out.println("File Not Found!");
 			System.exit(0);
