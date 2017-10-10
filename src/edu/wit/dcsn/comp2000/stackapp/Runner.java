@@ -43,15 +43,15 @@ public class Runner {
 	}
 
 	public static String parenthEval(String input) {
-		boolean parenthetical = false;
-		int parenRight = 0;
+		boolean parenthetical = false; // if expression has parentheses
+		int parenRight = 0; // locations of parentheses dealt with in current loop
 		int parenLeft = 0;
-		StringBuilder master = new StringBuilder(input);
-		while (master.length() > 1) {
+		StringBuilder master = new StringBuilder(input); // StringBuilder object to store input
+		while (master.length() > 1) { // while expression isn't full evaluated
 			parenLeft = 0;
 			parenRight = 0;
 			parenthetical = false;
-			for (int i = 0; i < master.length(); i++) {
+			for (int i = 0; i < master.length(); i++) { // find first end parentheses
 				if (master.charAt(i) == ')') {
 					parenRight = i;
 					parenthetical = true;
@@ -59,28 +59,28 @@ public class Runner {
 				}
 			}
 			if (!parenthetical) {
-				return Evaluate(master.toString()).toString();
+				return Evaluate(master.toString()).toString(); // immediately evaluate if not parenthetical
 			} else {
 				StringBuilder out = new StringBuilder("");
 				for (int i = parenRight; i >= 0; i--) {
-					if (master.charAt(i) == '(') {
+					if (master.charAt(i) == '(') { // find corresponding open parentheses
 						parenLeft = i;
 						break;
 					}
 				}
-				for (int i = parenLeft + 1; i < parenRight; i++) { // 5 + (5 * 2)
+				for (int i = parenLeft + 1; i < parenRight; i++) { // put expression inside parentheses in out
 					out.append(master.charAt(i));
 				}
-				Integer replace = Evaluate(out.toString()); // (5 * 2) = 10
+				Integer replace = Evaluate(out.toString()); // evaluate number to replace parentheses
 				int k = parenRight - parenLeft;
-				while (k > 0) { // 5 + ()
-					master.deleteCharAt(parenLeft + 1);
+				while (k > 0) { 
+					master.deleteCharAt(parenLeft + 1); // delete parentheses
 					k--;
 				}
-				master.replace(parenLeft, parenLeft + 1, replace.toString()); // 5 + 10
+				master.replace(parenLeft, parenLeft + 1, replace.toString()); // replace with evaluated number
 			}
 		}
-		return master.toString();
+		return master.toString(); // return fully evaluated expression
 	}
 
 	/**
