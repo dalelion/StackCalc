@@ -1,104 +1,121 @@
 import java.util.Arrays;
 import java.util.EmptyStackException;
 
+import java.util.Arrays;
+import java.util.EmptyStackException;
+
+
+
 /**
- * A class of stacks whose entries are stored in an array.
- * @author corey, jacob
- *
+    A class of stacks whose entries are stored in an array.
+    @author Frank M. Carrano and Timothy M. Henry
+    @version 4.0
  */
-public final class ArrayStack<T> implements StackInterface<T> {
-	
-	private T[] stack; //Array of stack entries
-	private int topIndex; //Index of top entry
+
+public class ArrayStack<T> implements StackInterface<T>
+{
+	private T[] stack;    // Array of stack entries
+	private int topIndex; // Index of top entry
 	private boolean initialized = false;
-	private static final int DEFAULT_CAPACITY = 50;	
+	private static final int DEFAULT_CAPACITY = 50;
 	private static final int MAX_CAPACITY = 10000;
 	
-	public ArrayStack() {
+	public static void main(String args[]){
+		ArrayStack<String> tester = new ArrayStack<>(100);
+		for(int i = 0; i < 10; i++){
+			tester.push("test");
+		}
+		System.out.println("Expected: test\nActual: " + tester.peek()); // test peek
+		System.out.println("Expected: test\nActual: " + tester.pop()); // test pop
+		tester.clear();
+		System.out.println("Expected: true\nActual: " + tester.isEmpty()); // test clear and isEmpty
+	}
+
+	public ArrayStack()
+	{
 		this(DEFAULT_CAPACITY);
-	} //end default constructor
-	
-	public ArrayStack(int initialCapacity){
+	} // end default constructor
+
+	public ArrayStack(int initialCapacity)
+	{
 		checkCapacity(initialCapacity);
-		
-		//The cast is safe because the new array contains null entries
+
+		// The cast is safe because the new array contains null entries
 		@SuppressWarnings("unchecked")
 		T[] tempStack = (T[])new Object[initialCapacity];
 		stack = tempStack;
 		topIndex = -1;
 		initialized = true;
-	} //end constructor
-	
-	/**
-	 * Checks to see if the stack has room for more entries
-	 * @param capacity	the amount of entries in the stack array
-	 * @return	True if there is still room 
-	 */
-	//not sure if this is the way to do this method
-	private boolean checkCapacity(int capacity){
-		return stack.length < MAX_CAPACITY;
-	}
-	/**
-	 * checks to see if the stack array is initialized.
-	 * If not then throws a SecurityException
-	 */
-	private void checkInitialization() {
-		if(!initialized){
-			throw new SecurityException(
-					"Stack Array object "
-					+"is not initialized properly"
-					);
-		}
-	}
-	
-	@Override
-	public void push(T newEntry) {
+	} // end constructor
+
+	//  < Implementations of the stack operations go here. >
+	public void push(T newEntry)
+	{
 		checkInitialization();
 		ensureCapacity();
 		stack[topIndex + 1] = newEntry;
 		topIndex++;
-	} //end push
-	
-	private void ensureCapacity(){
-		if(topIndex == stack.length -1){ //if array is full, double its size
-			int newLength = 2 * stack.length;
-			checkCapacity(newLength);
-			stack = Arrays.copyOf(stack, newLength);
-		} //end if
-	} //end ensureCapacity
+	} // end push
 
-	@Override
-	public T pop() {
+	// 6.18
+	public T peek()
+	{
 		checkInitialization();
-		if(isEmpty()){
+		if (isEmpty())
 			throw new EmptyStackException();
-		}else {
+		else
+			return stack[topIndex];
+	} // end peek
+
+	// 6.19
+	public T pop()
+	{
+		checkInitialization();
+		if (isEmpty()){
+			throw new EmptyStackException();
+		}
+		else{
 			T top = stack[topIndex];
 			stack[topIndex] = null;
 			topIndex--;
 			return top;
-		} //end if 
-	} //end pop
-
-	@Override
-	public T peek() {
-		checkInitialization();
-		if(isEmpty()) {
-			throw new EmptyStackException();
-		}else {
-			return stack[topIndex];
 		}
-	} //end of peek
+	} // end pop
 
-	@Override
-	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
+	// 6.20
+	public boolean isEmpty()
+	{
+		return topIndex < 0;
+	} // end isEmpty
+
+	// 6.20
+	public void clear()
+	{
+		topIndex = -1;	
+	} // end clear
+	
+	//  < Implementations of the private methods go here; checkCapacity and
+	//    checkInitialization are analogous to those in Chapter 2. >
+	
+	private void ensureCapacity(){
+		if(topIndex == stack.length -1){
+			int newLength = 2 * stack.length;
+			checkCapacity(newLength);
+			stack = Arrays.copyOf(stack, newLength);
+		}
 	}
-
-	@Override
-	public void clear() {
-		// TODO Auto-generated method stub
+	
+	private void checkInitialization(){
+		if (!initialized)
+			throw new SecurityException ("ArrayStack object is not initialized properly.");
 	}
-
-} //end of ArrayStack
+	
+	private void checkCapacity(int capacity)
+	{
+		if (capacity > MAX_CAPACITY)
+			throw new IllegalStateException("Attempt to create a stack " +
+					"whose capacity exceeds " +
+					"allowed maximum.");
+	} // end checkCapacity
+	//  . . .
+} // end ArrayStack
