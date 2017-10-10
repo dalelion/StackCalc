@@ -25,7 +25,7 @@ public class Runner {
 		try(Scanner fileReader = new Scanner(new File(Path))){
 			while(fileReader.hasNextLine()) {
 				String expression = fileReader.nextLine();
-				System.out.printf("%-35s      = %10s%10s%n", expression,  parenthEval(expression));
+				System.out.printf("%-35s      = %10s%n", expression,  parenthEval(expression));
 			}
 		}catch(FileNotFoundException e) {
 			System.out.println("File Not Found!");
