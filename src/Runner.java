@@ -11,17 +11,21 @@ public class Runner {
 		//System.out.println(k.toString());
 		//System.out.println(Evaluate("1+1*3"));
 		//System.out.println(parenthEval("(1+1)+(3*2)"));
-		System.out.println(parenthEval("6/-3"));
-		
-		//readFile("Infix Calculator Expressions - valid -- 2016-10-13 2.txt");
-		
+		//System.out.println(parenthEval("10/-2"));
+		try {
+		readFile("Infix Calculator Expressions - valid multi-digit -- 2017-10-04 01.txt");
+		} catch (Exception e) {
+			System.out.println("Error: " + e.getMessage());
+		}
 	}
 	
 	public static void readFile (String Path) {
+		System.out.printf("%5s   %10s%n", "File: ", Path);
+		System.out.printf("%-35s      |%10s    | %10s%n", "Expression", "Result", "Expected");
 		try(Scanner fileReader = new Scanner(new File(Path))){
 			while(fileReader.hasNextLine()) {
 				String expression = fileReader.nextLine();
-				System.out.println(expression + " = " + parenthEval(expression));
+				System.out.printf("%-35s      = %10s%10s%n", expression,  parenthEval(expression));
 			}
 		}catch(FileNotFoundException e) {
 			System.out.println("File Not Found!");
