@@ -47,54 +47,40 @@ public class Runner {
 		int parenRight = 0;
 		int parenLeft = 0;
 		StringBuilder master = new StringBuilder(input);
-		for (int i = 0; i < input.length(); i++) {
-			if (master.charAt(i) == ')') {
-				parenRight = i;
-				parenthetical = true;
-				break;
+		while (master.length() > 1) {
+			parenLeft = 0;
+			parenRight = 0;
+			parenthetical = false;
+			for (int i = 0; i < master.length(); i++) {
+				if (master.charAt(i) == ')') {
+					parenRight = i;
+					parenthetical = true;
+					break;
+				}
 			}
-		}
-
-		if (!parenthetical) {
-			return Evaluate(master.toString()).toString();
-		}
-
-		else {
-			while (master.length() > 1) {
-				parenLeft = 0;
-				parenRight = 0;
-				parenthetical = false;
-				for (int i = 0; i < master.length(); i++) {
-					if (master.charAt(i) == ')') {
-						parenRight = i;
-						parenthetical = true;
+			if (!parenthetical) {
+				return Evaluate(master.toString()).toString();
+			} else {
+				StringBuilder out = new StringBuilder("");
+				for (int i = parenRight; i >= 0; i--) {
+					if (master.charAt(i) == '(') {
+						parenLeft = i;
 						break;
 					}
 				}
-				if (!parenthetical) {
-					return Evaluate(master.toString()).toString();
-				} else {
-					StringBuilder out = new StringBuilder("");
-					for (int i = parenRight; i >= 0; i--) {
-						if (master.charAt(i) == '(') {
-							parenLeft = i;
-							break;
-						}
-					}
-					for (int i = parenLeft + 1; i < parenRight; i++) { // 5 + (5 * 2)
-						out.append(master.charAt(i));
-					}
-					Integer replace = Evaluate(out.toString()); // (5 * 2) = 10
-					int k = parenRight - parenLeft;
-					while (k > 0) { // 5 + ()
-						master.deleteCharAt(parenLeft + 1);
-						k--;
-					}
-					master.replace(parenLeft, parenLeft + 1, replace.toString()); // 5 + 10
+				for (int i = parenLeft + 1; i < parenRight; i++) { // 5 + (5 * 2)
+					out.append(master.charAt(i));
 				}
+				Integer replace = Evaluate(out.toString()); // (5 * 2) = 10
+				int k = parenRight - parenLeft;
+				while (k > 0) { // 5 + ()
+					master.deleteCharAt(parenLeft + 1);
+					k--;
+				}
+				master.replace(parenLeft, parenLeft + 1, replace.toString()); // 5 + 10
 			}
-			return master.toString();
 		}
+		return master.toString();
 	}
 
 	/**
