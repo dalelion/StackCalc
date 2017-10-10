@@ -1,4 +1,11 @@
-//4 + 3  
+package edu.wit.dcsn.comp2000.stackapp;
+
+/* Noah D'Alelio, Corey Pierce, Jacob Casey
+ * COMP-2000-03
+ * Stack APP Project (Calculator)
+ * 10/9/17
+ */
+
 public class Expression {
 
 	private Operator Op;
