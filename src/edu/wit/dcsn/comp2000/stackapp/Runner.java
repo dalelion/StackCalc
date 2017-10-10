@@ -121,18 +121,8 @@ public class Runner {
 			// Will go to this case if there is a value for the left number and operator
 			// (ex. 4+)
 			if (LeftNum != null && operator != null) {
-				expression = expression != null ? expression.Evaluate(new Expression(LeftNum, operator)) // If the
-																											// expression
-																											// is not
-																											// null,
-																											// evaluate
-																											// the
-																											// expression
-																											// with the
-																											// new left
-																											// number
-																											// and
-																											// operator
+				// If the expression is not null, evaluate the expression with the new left number and operator
+				expression = expression != null ? expression.Evaluate(new Expression(LeftNum, operator))
 						: new Expression(LeftNum, operator); // If it is null, set it equal to the new left and new
 																// operator
 
@@ -156,24 +146,11 @@ public class Runner {
 				// Will go to this case if there is a value for the left number but no operator
 				// (ex. +4 [Usually the end of the expression])
 			} else if (LeftNum != null && operator == null) {
-				expression = expression != null ? expression.Evaluate(new Expression(LeftNum, Operator.NONE)) // If the
-																												// expression
-																												// is
-																												// not
-																												// null,
-																												// evaluate
-																												// the
-																												// expression
-																												// with
-																												// the
-																												// new
-																												// left
-																												// number
-																												// and
-																												// operator
-						: new Expression(LeftNum, Operator.NONE); // If it is null, set it equal to the new left and no
-																	// operator
-
+				// If the expression is not null, evaluate the expression with the new left number and operator
+				expression = expression != null ? expression.Evaluate(new Expression(LeftNum, Operator.NONE))
+						: new Expression(LeftNum, Operator.NONE);
+				// If it is null, set it equal to the new left and no operator
+				
 				if (!ExpressionStack.isEmpty()) { // If the stack isn't empty then evaluate this with what is on the
 													// stack and push it back
 					Expression ex2 = ExpressionStack.pop();
@@ -184,11 +161,8 @@ public class Runner {
 				// value for the operator (ex. - [Usually at the beginning of an expression
 				// showing negative first number])
 			} else if (LeftNum == null && operator != null) {
-				expression = expression != null ? expression : new Expression(0, operator); // There is a problem with
-																							// this line when evaluating
-																							// two operators in a row
-																							// (ex. 6/-3)
-
+				expression = expression != null ? expression : new Expression(0, operator);
+				// There is a problem with this line when evaluating two operators in a row (ex. 6/-3)
 			} else {
 				break; // Expression is evaluated
 			}
